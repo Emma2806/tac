@@ -4,7 +4,7 @@ from collections import defaultdict
 import sys
 
 import spacy
-from spacy.lang.fr.examples import sentences 
+from spacy.lang.fr.examples import sentences
 
 nlp = spacy.load('fr_core_news_sm')
 
@@ -21,14 +21,14 @@ def test():
             print(f"'{doc.text}' contains no entities")
 
 def search():
-    text = open("data/1958.txt").read()[:1000000]
+    text = open("module3/1958.txt").read()[:1000000]
     doc = nlp(text)
     people = defaultdict(int)
     for ent in doc.ents:
         if ent.label_ == "PER" and len(ent.text) > 3:
             people[ent.text] += 1
     sorted_people = sorted(people.items(), key=lambda kv: kv[1], reverse=True)
-    for person, freq in sorted_people[:50]:
+    for person, freq in sorted_people[:20]:
         print(f"{person} appears {freq} times in the corpus")
 
 if __name__ == "__main__":
